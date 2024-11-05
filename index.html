@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-dracula.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+
+    <title>Text Encryptor | Corentin</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Text Encryptor</h1>
+        <label for="message">Message :</label>
+        <textarea id="message" rows="5"
+            cols="50">This is a secret message to encrypt !</textarea>
+        <label for="key">Key :</label>
+        <input type="text" id="key" value="Corentin" size="50">
+        <div class="buttons">
+            <button id="enc-btn">Encrypt</button>
+            <button id="dec-btn">Decrypt</button>
+        </div>
+
+        <h2>Result:</h2>
+        <div id="result"></div>
+
+    </div>
+    
+    <footer style="margin-top: 50px; text-align: center;">
+        <h2 style="color: #fff;">Mon Code :</h2>
+        <button id="toggle-code-btn" style="padding: 10px 20px; margin-top: 10px; background-color: #35302d; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+            Afficher mon Code Source du Projet : JavaScript
+        </button>
+        <div id="code-container" style="display: none; margin-top: 20px;">
+            <div class="footer-code-container">
+                <pre><code class="language-javascript">
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,?!'_-&@#$%*()/:<>|+= ";
+    
+    // Fonction de chiffrement
+    function encryptText(text, key) {
+        let encryptedText = "";
+        for (let i = 0; i < text.length; i++) {
+            const textChar = text[i];
+            const keyChar = key[i % key.length];
+            const textIndex = alphabet.indexOf(textChar);
+            const keyIndex = alphabet.indexOf(keyChar);
+            if (textIndex === -1) {
+                encryptedText += textChar;
+            } else {
+                const newIndex = (textIndex + keyIndex) % alphabet.length;
+                encryptedText += alphabet[newIndex];
+            }
+        }
+        return encryptedText;
+    }
+                </code></pre>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById("toggle-code-btn").addEventListener("click", function() {
+            const codeContainer = document.getElementById("code-container");
+            if (codeContainer.style.display === "none") {
+                codeContainer.style.display = "block";
+                this.textContent = "Masquer le Code Source";
+            } else {
+                codeContainer.style.display = "none";
+                this.textContent = "Afficher le Code Source";
+            }
+        });
+    </script>
+    
+    </footer>
+
+
+    <script src="index.js"></script>
+    
+</body>
+
+</html>
+<!-- J'ai développé cet outil pour mieux comprendre et expérimenter les bases du chiffrement en informatique, ainsi que pour améliorer mes compétences en JavaScript et en manipulation d'interfaces utilisateur. En mettant en pratique des concepts comme la substitution de caractères et l'algorithme de décalage en fonction de la clé, j’ai pu approfondir mes connaissances en cryptographie et en développement web. -->
+<!-- Le but de ce projet est de créer une application web simple permettant de crypter et décrypter du texte en utilisant une clé. Dans le monde de la sécurité informatique, l’encryptage est essentiel pour protéger des informations sensibles. Cet outil illustre le concept de chiffrement de base en rendant un message illisible sans la clé correspondante, et le rend facilement accessible via une interface intuitive. -->
